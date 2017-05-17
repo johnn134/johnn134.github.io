@@ -1,0 +1,81 @@
+<!-- 
+/* Module      : index.html
+ * Author      : John Nelson
+ * Email       : jpnelson@wpi.edu
+ * Course      : 4732
+ *
+ * Description : This is my submission for Project 3 for CS 4732.
+ *               This is the html file that
+ *               runs in tandem with a sybling JavaScript file.
+ * 
+ *               This program is built upon the WebGL tutorial code found at:
+ *               https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial
+ *               These tutorials provided the environment code for rendering
+ *               to a WebGL canvas element.
+ *
+ * Date        : 2017/04/08
+ *
+ * History:
+ * Revision      Date          Changed By
+ * ________      __________    __________
+ * 01.00         2017/03/28    jpnelson
+ * 02.00		 2017/04/08	   jpnelson
+ * First release.
+ *
+ * (c) Copyright 2017, Worcester Polytechnic Institute.
+ */ -->
+<html>
+	<head>
+    	<title>Animating Objects</title>
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    	<script src="sylvester.js" type="text/javascript"></script>
+    	<script src="glUtils.js" type="text/javascript"></script>
+		<script src="webglUtils.js" type="text/javascript"></script>
+		<script src="webgl-project3.js" type="text/javascript"></script>
+		<script src="quaternion.js" type="text/javascript"></script>
+		<script src="object.js" type="text/javascript"></script>
+		<script src="model.js" type="text/javascript"></script>
+		<script src="creature.js" type="text/javascript"></script>
+
+		<script id="shader-fs" type="x-shader/x-fragment">
+			varying lowp vec4 vColor;
+
+			void main(void) {
+ 				gl_FragColor = vColor;
+ 			}
+		</script>
+
+		<script id="shader-vs" type="x-shader/x-vertex">
+			attribute vec3 aVertexPosition;
+			attribute vec4 aVertexColor;
+
+			uniform mat4 uMVMatrix;
+			uniform mat4 uPMatrix;
+			
+			varying lowp vec4 vColor; 
+
+			void main(void) {
+				gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+			    vColor = aVertexColor;
+			}
+		</script>
+
+	</head>
+
+	<body onload="start()">
+		<div style="position:relative">
+			<canvas id="glCanvas" width="640px" height="480px">
+				Your browser doesn't appear to support the <code>&lt;canvas&gt;</code> element.
+			</canvas>
+			<canvas id="text" style="position: absolute; left: 0px; top: 0px; z-index: 10;"></canvas>
+		</div>
+	  	<div>
+	  		<hr>
+	  		<p id="debug"></p>
+	  	</div>
+	  	<script>
+			document.getElementById('files').addEventListener('change', readSplineFile, false);
+	  	</script>
+	</body>
+</html>
