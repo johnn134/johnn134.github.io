@@ -25,7 +25,6 @@
 /* -- GLOBAL VARIABLES --------------------------------------------------- */
 
 var gl; 	// A global variable for the WebGL context
-var ctx;	// A global variable for the WebGL text context
 var canvas;
 var txtCanvas;
 var mvMatrix;
@@ -34,8 +33,6 @@ var date;
 
 var objects = [];
 
-var fontSize = 16.0;
-var fontType = 'courier'
 var horizAspect = 480.0/640.0;
 var FPS = 60;
 var frame = 0;
@@ -70,14 +67,6 @@ function start() {
 		return;
 	}
 
-	txtCanvas = document.getElementById('text');
-
-	ctx = initWebGLText(txtCanvas);
-
-	if(!ctx) {
-		return;
-	}
-
 	// Set clear color to white, fully opaque
 	gl.clearColor(1.0, 1.0, 1.0, 1.0);
 	// Enable depth testing
@@ -86,13 +75,6 @@ function start() {
 	gl.depthFunc(gl.LEQUAL);
 	// Clear the color as well as the depth buffer.
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
-	//Set Text font
-	ctx.font = '' + fontSize + 'px ' + fontType;
-	ctx.textAlign = 'left';
-	ctx.textBaseline = 'hanging';
-	//Clear the text canvas
-	ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
 	initShaders();
 
@@ -136,9 +118,6 @@ function drawScene() {
 		drawObject(objects[i]);
 	}
 
-	//Draw text onto the text canvas element
-	drawText();
-
 	Update();
 }
 
@@ -175,13 +154,6 @@ function drawObject(obj) {
 
 	// Restore the original matrix
 	mvPopMatrix();
-}
-
-function drawText() {
-	ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-	ctx.fillText("Red   Creatures: " + numCreatures[0], 0, 0);
-	ctx.fillText("Green Creatures: " + numCreatures[1], 0, fontSize);
-	ctx.fillText("Blue  Creatures: " + numCreatures[2], 0, fontSize * 2);
 }
 
 /* ----------------------------------------------------------------------- */
