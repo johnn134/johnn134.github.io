@@ -55,28 +55,6 @@ function initWebGL(canvas) {
 }
 
 /* ----------------------------------------------------------------------- */
-/* Function    : initWebGLText(canvas)
- *
- * Description : Initialies the canvas on which the WebGL application text
- *               is displayed.
- *
- * Parameters  : WebGL-canvas canvas : the canvas element being drawn to
- *
- * Returns     : WebGL-context : 2d WebGL context
- */
-function initWebGLText(canvas) {
-  ctx = null;
-
-  ctx = canvas.getContext("2d");
-
-  if(!ctx) {
-    alert('Unable to initialize WebGL. Your browser may not support it.')
-  }
-
-  return ctx;
-}
-
-/* ----------------------------------------------------------------------- */
 /* Function    : initBuffers()
  *
  * Description : Initializes the OpenGL buffers storing the vertices positions, 
