@@ -58,6 +58,9 @@ var startingCreatures = 50;
 function start() {
 	//printHTML("starting");
 	canvas = document.getElementById('glCanvas');
+	
+	canvas.width = 240;
+	canvas.height = 320;
 
 	// Initialize the GL context
 	gl = initWebGL(canvas);
