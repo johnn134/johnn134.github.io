@@ -56,8 +56,8 @@ function start() {
 	//printHTML("starting");
 	canvas = document.getElementById('glCanvas');
 	
-	canvas.width = 240;
-	canvas.height = 320;
+	canvas.width = 1920;
+	canvas.height = 1080;
 
 	// Initialize the GL context
 	gl = initWebGL(canvas);
